@@ -24,6 +24,7 @@ function FeedbackForm() {
   }, [feedbackEdit]);
 
   const handleTextChange = (e) => {
+  
     if (text === "") {
       setBtnDisabled(true);
       setMessage(null);
@@ -39,8 +40,10 @@ function FeedbackForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (text.trim().length > 10) {
+    if(rating === "" || rating === undefined) {
+      setMessage('Please provide a rating score');
+    }
+    if (text.trim().length > 10 && rating !== "") {
       const newFeedback = {
         text,
         rating
@@ -51,6 +54,7 @@ function FeedbackForm() {
         addFeedback(newFeedback);
       }
       setText("");
+      setMessage(null)
     }
   };
 
